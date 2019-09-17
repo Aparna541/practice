@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee',
@@ -7,9 +8,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router, private route: ActivatedRoute) { 
+    debugger;
+  }
 
   ngOnInit() {
+  }
+
+  ngOnChanges () {
+
+  }
+  ngDoCheck () {
+    
+  }
+
+  ngAfterViewInit () {
+    
+  }
+  ngAfterViewChecked () {
+    
+  }
+  ngAfterConentInit () {
+    
+  }
+  ngAfterConentChecked () {
+    
+  }
+  ngOnDestroy () {
+    
+  }
+
+  tabChange(tabName) {
+    this.router.navigate([tabName], {relativeTo: this.route});
   }
 
 }

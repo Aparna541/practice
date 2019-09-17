@@ -1,2 +1,11 @@
 <p>employee works!</p>
 <!-- <app-information></app-information> -->
+<div>
+    <div (click)="tabChange('section1')">
+        section 1
+    </div>
+    <div (click)="tabChange('section2')">
+        section 2
+    </div>
+</div>
+<router-outlet></router-outlet>
