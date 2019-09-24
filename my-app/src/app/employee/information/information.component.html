@@ -1,34 +1,3 @@
-
-<div id="demo" class="carousel slide" data-ride="carousel">
-
-    <!-- Indicators -->
-    <ul class="carousel-indicators">
-      <li data-target="#demo" data-slide-to="0" class="active"></li>
-      <li data-target="#demo" data-slide-to="1"></li>
-      <li data-target="#demo" data-slide-to="2"></li>
-    </ul>
-    
-    <!-- The slideshow -->
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://alkite.files.wordpress.com/2009/05/surfing-1.jpg" alt="Los Angeles" width="1100" height="500">
-      </div>
-      <div class="carousel-item">
-        <img src="https://alkite.files.wordpress.com/2009/05/surfing-1.jpg" alt="Chicago" width="1100" height="500">
-      </div>
-      <div class="carousel-item">
-        <img src="https://alkite.files.wordpress.com/2009/05/surfing-1.jpg" alt="New York" width="1100" height="500">
-      </div>
-    </div>
-    
-    <!-- Left and right controls -->
-    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#demo" data-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </a>
-  </div>
   
    
     
@@ -36,22 +5,11 @@
 
 
 
-<p>Employees list </p>
-<div *ngIf="employeesList && employeesList.length > 0">
-    <div *ngFor="let employee of employeesList;let i=index;">
-        <div> 'Id:{{ employee.id }}</div>
-        <div>{{employee.first_name}}</div>
-        <div>{{employee.last_name}}</div>
-        <div>{{employee.email}}</div>
-        <button (click)="editEmployee(i)">Edit</button>
-
-    </div>
-
     <div>
         <div> Add Emplyee </div>
-        <input [ngStyle]="{'color': employee.first_name === 'ali' ? 'blue' : 'red'}" type="text" placeholder="First name" [ngModel]="employee.first_name" (ngModelChange)="updaModel($event)"  />
-        <input type="text" placeholder="First name" [(ngModel)]="employee.last_name" />
-        <input type="email" placeholder="email" [(ngModel)]="employee.email" />
+        <input appAplhanumeric [ngStyle]="{'color': employee.first_name === 'ali' ? 'blue' : 'red'}" type="text" placeholder="First name" [ngModel]="employee.first_name" (ngModelChange)="updaModel($event)"  />
+        <input  appAplhanumeric type="text" placeholder="First name" [(ngModel)]="employee.last_name" />
+        <input appAplhanumeric type="email" placeholder="email" [(ngModel)]="employee.email" />
     </div>
     <div> 
         <button *ngIf="!editEmp" (click)="addEmployee()"  >Add Employee </button>
@@ -62,4 +20,5 @@
 
     
     </div>
-</div>
+    <app-list [empList]="employeesList" (edit)="editEmployee($event)" >        <h1 class="head" >headeeeerr</h1><span>Employees list !!!!!!!!!!!!!!!!!!!</span></app-list>
+

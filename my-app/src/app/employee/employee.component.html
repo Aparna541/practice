@@ -1,11 +1,31 @@
-<p>employee works!</p>
-<!-- <app-information></app-information> -->
+<p>About page is open with {{data}}</p>
 <div>
     <div (click)="tabChange('section1')">
         section 1
     </div>
     <div (click)="tabChange('section2')">
-        section 2
+        section 2 starts here in order to know more about section 2 please go through the linka below
+        <br>
+        <div (click)= "tabChange('section3')">
+            Know more about section 2 here
+        </div>
+
     </div>
 </div>
+
+
+
+<!-- <div class="sec_1">
+    <div (click)="tabChange('tab3')">
+        move to tab1
+    </div>
+    <div (click)="tabChange('tab4')">
+        move to tab2
+    </div>
+</div> -->
+
+
+
 <router-outlet></router-outlet>
+<app-information></app-information> 
+

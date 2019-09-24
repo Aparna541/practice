@@ -1,0 +1,12 @@
+<!-- <p>Employees list </p> -->
+<ng-content select="span" ></ng-content>
+<div *ngIf="employeesList && employeesList.length > 0">
+    <div *ngFor="let employee of employeesList;let i=index;">
+        <div> 'Id:{{ employee.id }}</div>
+        <div>{{employee.first_name}}</div>
+        <div>{{employee.last_name}}</div>
+        <div>{{employee.email}}</div>
+        <button (click)="editEmp(i)">Edit</button>
+
+    </div>
+    <ng-content select=".head" ></ng-content>

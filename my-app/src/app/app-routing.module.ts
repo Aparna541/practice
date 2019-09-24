@@ -4,15 +4,21 @@ import { InformationComponent } from './employee/information/information.compone
 import { EmployeeComponent } from './employee/employee.component';
 import { PracticeComponent1} from './practice1/practice1.component';
 import { childroutes } from './employee/employee.module';
+import { Section3Component } from './employee/section3/section3.component';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 
 
 
 const routes: Routes = [
-  { path: 'home', component: InformationComponent }, 
-  { path: 'employees',  component: EmployeeComponent,    children: childroutes },
-  { path: 'practice1',  component: PracticeComponent1 , data : { title: 'Details' }},
-  { path: '',   redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: EmployeeComponent } 
+  { path: 'home',  component: HomeComponent }, 
+ { path: 'about', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) },
+
+ // { path: 'about', component: EmployeeComponent,    children: childroutes },
+  { path: 'contact', loadChildren: () => import('./practice1/practice1.module').then(m => m.PracticeModule1)},
+//  { path: 'gallery', component:Section3Component},
+  { path: '', component: HomeComponent },
+  { path: '**', component:  HomeComponent} 
 ];
 
 

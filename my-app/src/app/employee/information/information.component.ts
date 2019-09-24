@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { Component, OnInit, HostListener } from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { InformationService } from './information.service';
 export interface Employee {
   first_name: string;
   last_name: string;
@@ -10,29 +11,50 @@ export interface Employee {
 @Component({
   selector: 'app-information',
   templateUrl: './information.component.html',
-  styleUrls: ['./information.component.css']
+  styleUrls: ['./information.component.css'],
+  providers: [InformationService],
 })
 export class InformationComponent implements OnInit {
   employeesList: any[];
   employee: Employee;
   editEmp = false;
-  constructor(public httpClient: HttpClient) { }
+  constructor(public informationService : InformationService) { }
 
+
+  
   ngOnInit() {
     this.employee = {'first_name': '','last_name': '','email': ''};
     this.getEmployees();
   }
 
   getEmployees() {
-    this.httpClient.get('http://localhost:3000/employees').subscribe((res: any) => {
+    // const headers = new HttpHeaders();
+   // headers.set('Content-Type','application/json');
+  //  headers.set('Content-Type','application/json');
+  //  headers.set('token', 'my-new-auth-token');
+
+  const httpOptions = {
+    headers: new HttpHeaders({
+   //  'Content-Type':  'application/json',
+    // 'Authorization': 'my-auth-token'
+    })
+  };
+
+  httpOptions.headers.set('Accept', 'application/text');
+    this.informationService.getEmployeesAPI(httpOptions).subscribe((res: any) => {
       console.log('respones', res);
       this.employeesList = res;
+    }, err => { 
+      console.log(err);
+      if (err.status === 401) {
+          // go to login page
+      }
     });
   }
 
   addEmployee() {
     this.employee.id = this.employeesList.length+1;
-    this.httpClient.post('http://localhost:3000/employees/',this.employee).subscribe((res: any) => {
+    this.informationService.addEmployeeAPI(this.employee).subscribe((res: any) => {
       console.log('respones', res);
       debugger;
       //this.employeesList.push(res);
@@ -47,12 +69,17 @@ export class InformationComponent implements OnInit {
   }
 
   updateEmployee() {
-    this.httpClient.put('http://localhost:3000/employees/'+ this.employee.id ,this.employee).subscribe((res: any) => {
+    this.informationService.updateEmployeeAPI(this.employee.id ,this.employee).subscribe((res: any) => {
       console.log('respones', res);
       debugger;
       //this.employeesList.push(res);
       this.getEmployees();
 
+    }, err => { 
+      console.log(err);
+      if (err.status === 401) {
+          // go to login page
+      }
     });
   }
 
@@ -66,3 +93,7 @@ export class InformationComponent implements OnInit {
   }
 
 }
+
+
+
+

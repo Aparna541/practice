@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from './app.service';
 
 
 @Component({
@@ -8,4 +9,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app';
+  currentTab = 'Home';
+
+  constructor(private appService: AppService) {
+    
+  }
+
+  ngOnInit() {
+    this.appService.loginToken = '1232321312312';
+  }
+
+  tabClicked(menu) {
+    this.currentTab = menu;
+  }
 }
