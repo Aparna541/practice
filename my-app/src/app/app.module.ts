@@ -12,26 +12,35 @@ import { from } from 'rxjs';
 import { InformationComponent } from './employee/information/information.component';
 import { MessageService } from './message.service';
 import { AplhanumericDirective } from './utils/only-alphanumeric.directive';
+import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './authorization.interceptor';
 // import { AlertModule } from 'ngx-bootstrap';
 //import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+
+
     // SharedModule
    // EmployeeModule,
    // PracticeModule1,
    // AlertModule.forRoot(),
     // NgbModule
   ],
-  providers: [{ provide: AppService, useClass: AppService }, MessageService
-
+  providers: [{ provide: AppService, useClass: AppService }, MessageService,
+  //  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   exports: [],
 

@@ -40,8 +40,11 @@ export class InformationComponent implements OnInit {
     })
   };
 
-  httpOptions.headers.set('Accept', 'application/text');
-    this.informationService.getEmployeesAPI(httpOptions).subscribe((res: any) => {
+ // headers.set('token', loginToken);
+  
+
+  // httpOptions.headers.set('Accept', 'application/text');
+    this.informationService.getEmployeesAPI().subscribe((res: any) => {
       console.log('respones', res);
       this.employeesList = res;
     }, err => { 

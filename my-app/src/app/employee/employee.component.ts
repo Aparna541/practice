@@ -10,12 +10,12 @@ import { MessageService } from '../message.service';
 })
 export class EmployeeComponent implements OnInit {
   data = 'dsfdfsdfsd';
-
+  subscription: any;
   constructor(public router: Router, private route: ActivatedRoute, private appService: AppService, public messageService: MessageService) { 
   }
 
   ngOnInit() {
-    this.messageService.getMessage().subscribe((response) => { 
+    this.subscription = this.messageService.getMessage().subscribe((response) => { 
       console.log(response);
       this.data = response;
     });
@@ -26,6 +26,10 @@ export class EmployeeComponent implements OnInit {
   tabChange(tabName) {
     this.router.navigate([tabName], {relativeTo: this.route, skipLocationChange: false});
     // this.router.navigateByUrl('section2/33/user/11', {relativeTo: this.route})
+  }
+
+  ngOnDestroy () {
+    this.subscription.unsubscribe();
   }
 
 }
